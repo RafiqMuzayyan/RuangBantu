@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | RuangBantu</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <main class="login-container">
+
+        <section class="login-card">
+
+            <div class="brand">
+                <div class="brand-icon">R</div>
+                <span>RuangBantu</span>
+            </div>
+
+            <div class="login-heading">
+                <h1>Selamat datang kembali</h1>
+                <p>Masuk untuk melanjutkan ke layanan bantuan.</p>
+            </div>
+
+            <form method="POST" action="{{ url_for('login') }}">    
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input
+                        type="text"
+                        id="email"
+                        name="email"
+                        placeholder="Masukkan Email"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Masukkan password"
+                        autocomplete="current-password"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="login-button">
+                    Masuk
+                </button>
+
+            </form>
+
+            <p class="register-text">
+                Belum memiliki akun?
+                <a href="{{ url_for('register') }}">Daftar sekarang</a>
+            </p>
+
+            <div class="login-footer">
+                RuangBantu &copy; 2026
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

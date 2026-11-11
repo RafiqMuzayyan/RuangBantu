@@ -1,0 +1,636 @@
+
+/* =========================
+   COLOR PALETTE
+========================= */
+
+:root {
+    --background: #FAFBF8;
+    --primary: #244C3B;
+    --sage: #DCE7DD;
+    --mint: #EDF3ED;
+    --text: #343B36;
+    --muted: #89938B;
+    --border: #E3E9E2;
+    --white: #FFFFFF;
+}
+
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--background);
+    color: var(--text);
+}
+
+/* =========================
+   LOGIN LAYOUT
+========================= */
+
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 420px;
+    background: var(--white);
+    padding: 40px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+}
+
+/* =========================
+   BRAND
+========================= */
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 42px;
+    color: var(--primary);
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.brand-icon {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--primary);
+    color: var(--white);
+    border-radius: 10px;
+}
+
+/* =========================
+   HEADING
+========================= */
+
+.login-heading {
+    margin-bottom: 28px;
+}
+
+.login-heading h1 {
+    font-size: 25px;
+    margin-bottom: 9px;
+    color: var(--text);
+}
+
+.login-heading p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* =========================
+   FORM
+========================= */
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    outline: none;
+    font-size: 14px;
+    color: var(--text);
+    background: var(--white);
+}
+
+.form-group input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--mint);
+}
+
+.form-group input::placeholder {
+    color: #AAB2AC;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.login-button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 5px;
+    background: var(--primary);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.login-button:hover {
+    background: #193A2C;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.register-text {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.register-text a {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.register-text a:hover {
+    text-decoration: underline;
+}
+
+.login-footer {
+    margin-top: 38px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+
+/* DASHBOARD */
+
+.dashboard-navbar {
+    min-height: 72px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    padding: 0 7%;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--primary);
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.nav-menu {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+}
+
+.nav-menu a,
+.nav-account a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.nav-menu a.active {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.nav-account {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+    font-size: 14px;
+}
+
+.nav-account a {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 45px 30px;
+}
+
+.dashboard-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 32px;
+}
+
+.dashboard-heading h1 {
+    font-size: 27px;
+    margin-bottom: 8px;
+}
+
+.dashboard-heading p,
+.section-heading p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.create-ticket-button {
+    padding: 12px 18px;
+    background: var(--primary);
+    color: var(--white);
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.ticket-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.summary-card {
+    padding: 24px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+.summary-card span {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.summary-card h2 {
+    margin-top: 12px;
+    color: var(--primary);
+    font-size: 28px;
+}
+
+.ticket-section {
+    padding: 25px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+.section-heading {
+    margin-bottom: 22px;
+}
+
+.section-heading h2 {
+    font-size: 19px;
+    margin-bottom: 7px;
+}
+
+.ticket-table-wrapper {
+    overflow-x: auto;
+}
+
+.ticket-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.ticket-table th,
+.ticket-table td {
+    padding: 16px 12px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.ticket-table th {
+    color: var(--muted);
+    font-weight: 600;
+}
+
+.status {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status.open {
+    background: #FFF3DC;
+    color: #9A681C;
+}
+
+.status.progress {
+    background: #E8EFFB;
+    color: #42669D;
+}
+
+.status.closed {
+    background: var(--mint);
+    color: var(--primary);
+}
+
+
+/* TICKET FORM */
+
+.form-container {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 45px 30px;
+}
+
+.form-page-heading {
+    margin-bottom: 25px;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 22px;
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.form-page-heading h1 {
+    font-size: 27px;
+    margin-bottom: 9px;
+}
+
+.form-page-heading p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.ticket-form-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 30px;
+}
+
+.ticket-form-card .form-group {
+    margin-bottom: 24px;
+}
+
+.ticket-form-card input,
+.ticket-form-card select,
+.ticket-form-card textarea {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    outline: none;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--text);
+    background: var(--white);
+}
+
+.ticket-form-card textarea {
+    resize: vertical;
+    min-height: 150px;
+    line-height: 1.6;
+}
+
+.ticket-form-card input:focus,
+.ticket-form-card select:focus,
+.ticket-form-card textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--mint);
+}
+
+.ticket-form-card input::placeholder,
+.ticket-form-card textarea::placeholder {
+    color: #AAB2AC;
+}
+
+.input-hint {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.form-actions .login-button {
+    width: auto;
+    margin: 0;
+    padding: 13px 22px;
+}
+
+.cancel-button {
+    padding: 13px 20px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.cancel-button:hover {
+    background: var(--mint);
+}
+
+
+/* TICKET DETAIL */
+
+.ticket-detail-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 30px;
+}
+
+.detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid var(--border);
+}
+
+.detail-id {
+    display: block;
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.detail-header h2 {
+    font-size: 21px;
+}
+
+.detail-information {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 25px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.detail-information div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.detail-information span {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.detail-information strong {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.detail-description {
+    padding: 25px 0;
+}
+
+.detail-description h3 {
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+.detail-description p {
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.detail-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+}
+
+@media (max-width: 600px) {
+    .ticket-detail-card {
+        padding: 22px 18px;
+    }
+
+    .detail-information {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .detail-header h2 {
+        font-size: 18px;
+    }
+}
+
+
+@media (max-width: 600px) {
+    .form-container {
+        padding: 30px 18px;
+    }
+
+    .ticket-form-card {
+        padding: 22px 18px;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .form-actions .login-button,
+    .cancel-button {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+
+
+@media (max-width: 700px) {
+    .dashboard-navbar {
+        padding: 15px 20px;
+        grid-template-columns: 1fr 1fr;
+        row-gap: 15px;
+    }
+
+    .nav-menu {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        justify-content: flex-start;
+    }
+
+    .nav-account {
+        justify-content: flex-end;
+    }
+
+    .dashboard-container {
+        padding: 30px 18px;
+    }
+
+    .dashboard-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .ticket-summary {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .ticket-section {
+        padding: 18px;
+    }
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 480px) {
+    .login-card {
+        padding: 28px 22px;
+    }
+
+    .login-heading h1 {
+        font-size: 22px;
+    }
+}

@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | RuangBantu</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <header class="dashboard-navbar">
+        <div class="nav-brand">
+            <div class="brand-icon">R</div>
+            <span>RuangBantu</span>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="#" class="active">Dashboard</a>
+            <a href="#">Tiket Saya</a>
+        </nav>
+
+        <div class="nav-account">
+            <span>Pengguna</span>
+            <a href="{{ url_for('logout') }}">Keluar</a>
+        </div>
+    </header>
+
+    <main class="dashboard-container">
+
+        <section class="dashboard-heading">
+            <div>
+                <h1>Selamat datang!</h1>
+                <p>Pantau dan kelola laporan bantuanmu di sini.</p>
+            </div>
+
+            <a href="{{ url_for('create_ticket') }}" class="create-ticket-button">
+                + Buat Tiket
+            </a>
+        </section>
+
+        <section class="ticket-summary">
+            <div class="summary-card">
+                <span>Total Tiket</span>
+                <h2>05</h2>
+            </div>
+
+            <div class="summary-card">
+                <span>Dalam Proses</span>
+                <h2>02</h2>
+            </div>
+
+            <div class="summary-card">
+                <span>Selesai</span>
+                <h2>03</h2>
+            </div>
+        </section>
+
+        <section class="ticket-section">
+            <div class="section-heading">
+                <div>
+                    <h2>Tiket Terbaru</h2>
+                    <p>Daftar laporan bantuan yang telah dibuat.</p>
+                </div>
+            </div>
+
+            <div class="ticket-table-wrapper">
+                <table class="ticket-table">
+                    <thead>
+                        <tr>
+                            <th>Judul Tiket</th>
+                            <th>Kategori</th>
+                            <th>Tanggal</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>
+                                <a href="{{ url_for('ticket_detail', ticket_id=1) }}">
+                                    Masalah koneksi internet
+                                </a>
+                            </td>
+                            <td>Technical</td>
+                            <td>10 Nov 2026</td>
+                            <td><span class="status open">Open</span></td>
+                        </tr>
+
+                        <tr>
+                            <td>Tidak bisa login</td>
+                            <td>Account</td>
+                            <td>09 Nov 2026</td>
+                            <td><span class="status progress">In Progress</span></td>
+                        </tr>
+
+                        <tr>
+                            <td>Pertanyaan layanan</td>
+                            <td>General</td>
+                            <td>08 Nov 2026</td>
+                            <td><span class="status closed">Closed</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

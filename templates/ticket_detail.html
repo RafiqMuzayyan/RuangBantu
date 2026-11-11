@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Tiket | RuangBantu</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <header class="dashboard-navbar">
+        <div class="nav-brand">
+            <div class="brand-icon">R</div>
+            <span>RuangBantu</span>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="#">Tiket Saya</a>
+        </nav>
+
+        <div class="nav-account">
+            <span>Pengguna</span>
+            <a href="{{ url_for('logout') }}">Keluar</a>
+        </div>
+    </header>
+
+    <main class="form-container">
+
+        <div class="form-page-heading">
+            <a href="{{ url_for('dashboard') }}" class="back-link">
+                ← Kembali ke Dashboard
+            </a>
+
+            <h1>Detail Tiket</h1>
+            <p>Informasi lengkap mengenai laporan bantuan.</p>
+        </div>
+
+        <section class="ticket-detail-card">
+
+            <div class="detail-header">
+                <div>
+                    <span class="detail-id">Tiket #001</span>
+                    <h2>Masalah koneksi internet</h2>
+                </div>
+
+                <span class="status open">Open</span>
+            </div>
+
+            <div class="detail-information">
+                <div>
+                    <span>Kategori</span>
+                    <strong>Technical</strong>
+                </div>
+
+                <div>
+                    <span>Tanggal Dibuat</span>
+                    <strong>11 November 2026</strong>
+                </div>
+
+                <div>
+                    <span>Pelapor</span>
+                    <strong>user01</strong>
+                </div>
+            </div>
+
+            <div class="detail-description">
+                <h3>Detail Keluhan</h3>
+                <p>
+                    Saya mengalami masalah koneksi internet sejak pagi.
+                    Koneksi sering terputus dan beberapa situs tidak
+                    dapat diakses.
+                </p>
+            </div>
+
+            <div class="detail-footer">
+                <a href="{{ url_for('dashboard') }}"
+                   class="cancel-button">Kembali</a>
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>
