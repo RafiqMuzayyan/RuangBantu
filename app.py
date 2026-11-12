@@ -1,9 +1,9 @@
-
 from flask import (
     Flask, render_template, request,
     redirect, url_for, session, flash
 )
-
+from db.ticket import create_ticket as save_ticket
+from security.encryption import encrypt_data
 from db.connection import get_db_connection
 from db.user import register_user, authenticate_user
 
@@ -59,13 +59,34 @@ def dashboard():
 
     return render_template("dashboard.html")
 
-@app.route("/ticket/create")
+@app.route("/ticket/create", methods=["GET", "POST"])
 def create_ticket():
     if "user_id" not in session:
         return redirect(url_for("login"))
 
-    return render_template("ticket_form.html")
+    if request.method == "POST":
+        title = request.form.get("title", "").strip()
+        category = request.form.get("category", "")
+        description = request.form.get("description", "").strip()
 
+        if not title or not category or not description:
+            flash("Semua kolom wajib diisi.")
+            return redirect(url_for("create_ticket"))
+
+        nonce, ciphertext = encrypt_data(description)
+
+        save_ticket(
+            session["user_id"],
+            title,
+            category,
+            nonce,
+            ciphertext
+        )
+
+        flash("Tiket berhasil dibuat.")
+        return redirect(url_for("dashboard"))
+
+    return render_template("ticket_form.html")
 
 @app.route("/ticket/<int:ticket_id>")
 def ticket_detail(ticket_id):

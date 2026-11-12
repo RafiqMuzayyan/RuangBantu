@@ -33,7 +33,8 @@ def init_db():
                     CHECK(category IN (
                         'Technical', 'Account', 'General'
                     )),
-                description BLOB NOT NULL,
+                description_nonce TEXT NOT NULL,
+                description TEXT NOT NULL,
                 status TEXT NOT NULL DEFAULT 'Open'
                     CHECK(status IN (
                         'Open', 'In Progress', 'Closed'

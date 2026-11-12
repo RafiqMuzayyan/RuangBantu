@@ -1,7 +1,5 @@
-
 import bcrypt
 from db.connection import get_db_connection
-
 
 def register_user(username, email, password):
     password_hash = bcrypt.hashpw(
@@ -28,7 +26,6 @@ def register_user(username, email, password):
 
     finally:
         connection.close()
-
 
 def authenticate_user(email, password):
     connection = get_db_connection()
