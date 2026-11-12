@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiket Saya | RuangBantu</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <header class="dashboard-navbar">
+        <div class="nav-brand">
+            <div class="brand-icon">R</div>
+            <span>RuangBantu</span>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('my_tickets') }}" class="active">
+                Tiket Saya
+            </a>
+        </nav>
+
+        <div class="nav-account">
+            <span>{{ session['username'] }}</span>
+            <a href="{{ url_for('logout') }}">Keluar</a>
+        </div>
+    </header>
+
+    <main class="dashboard-container">
+
+        <div class="dashboard-heading">
+            <div>
+                <h1>
+                    {{ 'Semua Tiket' if session['role'] == 'admin' else 'Tiket Saya' }}
+                </h1>
+                <p>Kelola dan pantau laporan tiket kamu.</p>
+            </div>
+
+            <a href="{{ url_for('create_ticket') }}"
+               class="create-ticket-button">
+                + Buat Tiket
+            </a>
+        </div>
+
+        <section class="ticket-section">
+
+            <div class="section-heading">
+                <h2>Daftar Tiket</h2>
+                <p>{{ tickets|length }} tiket ditemukan</p>
+            </div>
+
+            <form method="GET"
+                  action="{{ url_for('my_tickets') }}"
+                  class="ticket-search">
+
+                <input
+                    type="search"
+                    name="search"
+                    placeholder="Cari judul, kategori, atau status..."
+                    value="{{ search }}"
+                >
+
+                <button type="submit">Cari</button>
+
+                {% if search %}
+                    <a href="{{ url_for('my_tickets') }}">Reset</a>
+                {% endif %}
+            </form>
+
+            <div class="ticket-table-wrapper">
+
+                <table class="ticket-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Judul Tiket</th>
+                            <th>Kategori</th>
+
+                            {% if session['role'] == 'admin' %}
+                                <th>Pelapor</th>
+                            {% endif %}
+
+                            <th>Tanggal</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for ticket in tickets %}
+                        <tr>
+                            <td>#{{ ticket.id }}</td>
+                            <td>{{ ticket.title }}</td>
+                            <td>{{ ticket.category }}</td>
+
+                            {% if session['role'] == 'admin' %}
+                                <td>{{ ticket.username }}</td>
+                            {% endif %}
+
+                            <td>{{ ticket.created_at }}</td>
+
+                            <td>
+                                <span class="status {% if ticket.status == 'In Progress' %}progress{% else %}{{ ticket.status|lower }}{% endif %}">
+                                    {{ ticket.status }}
+                                </span>
+                            </td>
+
+                            <td>
+                                <a href="{{ url_for('ticket_detail', ticket_id=ticket.id) }}"
+                                   style="color: var(--primary); font-weight: 600; text-decoration: none;">
+                                    Detail
+                                </a>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="{{ 7 if session['role'] == 'admin' else 6 }}"
+                                style="text-align: center; padding: 35px; color: var(--muted);">
+                                {% if search %}
+                                    Tiket tidak ditemukan.
+                                {% else %}
+                                    Belum ada tiket.
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

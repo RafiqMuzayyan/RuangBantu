@@ -18,8 +18,8 @@
         </div>
 
         <nav class="nav-menu">
-            <a href="{{ url_for('dashboard') }}">Dashboard</a>
-            <a href="#">Tiket Saya</a>
+            <a href="{{ url_for('dashboard') }}" class="active">Dashboard</a>
+            <a href="{{ url_for('my_tickets') }}">Tiket Saya</a>
         </nav>
 
         <div class="nav-account">
@@ -75,10 +75,26 @@
             </div>
 
             <div class="detail-footer">
-                <a href="{{ url_for('dashboard') }}"
-                   class="cancel-button">Kembali</a>
-            </div>
+                <form
+                    action="{{ url_for('remove_ticket', ticket_id=ticket.id) }}"
+                    method="POST"
+                    onsubmit="return confirm('Apakah kamu yakin ingin menghapus tiket ini?');"
+                >
+                    <button type="submit" class="delete-button">
+                        Hapus
+                    </button>
+                </form>
 
+                 <a href="{{ url_for('edit_ticket', ticket_id=ticket.id) }}"
+                class="update-button">
+                    Edit
+                </a>
+
+                <a href="{{ url_for('dashboard') }}"
+                class="cancel-button">
+                    Kembali
+                </a>
+            </div>
         </section>
 
     </main>

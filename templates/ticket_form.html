@@ -18,8 +18,8 @@
         </div>
 
         <nav class="nav-menu">
-            <a href="{{ url_for('dashboard') }}">Dashboard</a>
-            <a href="#">Tiket Saya</a>
+            <a href="{{ url_for('dashboard') }}" class="active">Dashboard</a>
+            <a href="{{ url_for('my_tickets') }}">Tiket Saya</a>
         </nav>
 
         <div class="nav-account">
@@ -39,9 +39,11 @@
             <p>Jelaskan kendala yang kamu alami agar dapat segera dibantu.</p>
         </div>
 
-        <section class="ticket-form-card">
-            <form action="{{ url_for('create_ticket') }}" method="POST">
-
+        <section class="ticket-form-card">           
+            <form
+                action="{% if ticket %}{{ url_for('edit_ticket', ticket_id=ticket.id) }}{% else %}{{ url_for('create_ticket') }}{% endif %}"
+                method="POST"
+            >
                 <div class="form-group">
                     <label for="title">Judul Tiket</label>
                     <input
@@ -50,6 +52,7 @@
                         name="title"
                         placeholder="Contoh: Tidak bisa login ke akun"
                         maxlength="100"
+                        value="{{ ticket.title if ticket else '' }}"
                         required
                     >
                 </div>
@@ -57,12 +60,24 @@
                 <div class="form-group">
                     <label for="category">Kategori</label>
                     <select id="category" name="category" required>
-                        <option value="" disabled selected>
+                        <option value="" disabled {% if not ticket %}selected{% endif %}>
                             Pilih kategori
                         </option>
-                        <option value="Technical">Technical</option>
-                        <option value="Account">Account</option>
-                        <option value="General">General</option>
+
+                        <option value="Technical"
+                            {% if ticket and ticket.category == 'Technical' %}selected{% endif %}>
+                            Technical
+                        </option>
+
+                        <option value="Account"
+                            {% if ticket and ticket.category == 'Account' %}selected{% endif %}>
+                            Account
+                        </option>
+
+                        <option value="General"
+                            {% if ticket and ticket.category == 'General' %}selected{% endif %}>
+                            General
+                        </option>
                     </select>
                 </div>
 
@@ -74,21 +89,23 @@
                         rows="7"
                         placeholder="Jelaskan masalah yang kamu alami secara detail..."
                         required
-                    ></textarea>
+                    >{{ ticket.description if ticket else '' }}</textarea>
+
                     <span class="input-hint">
                         Sertakan informasi yang membantu Admin memahami masalahmu.
                     </span>
                 </div>
 
                 <div class="form-actions">
-                    <a href="{{ url_for('dashboard') }}"
-                       class="cancel-button">Batal</a>
+                    <a href="{% if ticket %}{{ url_for('ticket_detail', ticket_id=ticket.id) }}{% else %}{{ url_for('dashboard') }}{% endif %}"
+                    class="cancel-button">
+                        Batal
+                    </a>
 
                     <button type="submit" class="login-button">
-                        Kirim Tiket
+                        {% if ticket %}Simpan Perubahan{% else %}Kirim Tiket{% endif %}
                     </button>
                 </div>
-
             </form>
         </section>
 

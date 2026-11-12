@@ -457,7 +457,7 @@ body {
 
 .cancel-button {
     padding: 13px 20px;
-    border: 1px solid var(--border);
+    border: 2px solid var(--border);
     border-radius: 8px;
     color: var(--text);
     text-decoration: none;
@@ -469,6 +469,39 @@ body {
     background: var(--mint);
 }
 
+.update-button {
+    padding: 13px 20px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    background-color: #0975af;
+}
+
+.update-button:hover {
+    background: #05476b;
+}
+
+.delete-button {
+    padding: 13px 20px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    background-color: #dc3545;
+}
+
+.delete-button:hover {
+    background-color: #bb2d3b;
+}
+
+.detail-footer form {
+    margin: 0;
+}
 
 /* TICKET DETAIL */
 
@@ -543,6 +576,70 @@ body {
     justify-content: flex-end;
     padding-top: 20px;
     border-top: 1px solid var(--border);
+    gap: 8px;
+}
+
+
+/* TICKET SEARCH */
+
+.ticket-search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 22px;
+}
+
+.ticket-search input {
+    flex: 1;
+    min-width: 0;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    outline: none;
+    font-size: 14px;
+    color: var(--text);
+    background: var(--white);
+}
+
+.ticket-search input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--mint);
+}
+
+.ticket-search input::placeholder {
+    color: var(--muted);
+}
+
+.ticket-search button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    background: var(--primary);
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.ticket-search button:hover {
+    background: #193A2C;
+}
+
+.ticket-search a {
+    color: var(--primary);
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+@media (max-width: 600px) {
+    .ticket-search {
+        flex-wrap: wrap;
+    }
+
+    .ticket-search input {
+        flex-basis: 100%;
+    }
 }
 
 @media (max-width: 600px) {
@@ -559,7 +656,6 @@ body {
         font-size: 18px;
     }
 }
-
 
 @media (max-width: 600px) {
     .form-container {
@@ -581,8 +677,6 @@ body {
         text-align: center;
     }
 }
-
-
 
 @media (max-width: 700px) {
     .dashboard-navbar {
@@ -619,7 +713,6 @@ body {
         padding: 18px;
     }
 }
-
 
 /* =========================
    RESPONSIVE

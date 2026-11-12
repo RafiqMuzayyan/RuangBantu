@@ -80,3 +80,88 @@ def get_user_tickets(user_id, role):
 
     finally:
         connection.close()
+        
+def update_ticket(
+    ticket_id,
+    user_id,
+    role,
+    title,
+    category,
+    nonce,
+    ciphertext
+):
+    connection = get_db_connection()
+
+    try:
+        if role == "admin":
+            cursor = connection.execute(
+                """
+                UPDATE tickets
+                SET title = ?,
+                    category = ?,
+                    description_nonce = ?,
+                    description = ?
+                WHERE id = ?
+                """,
+                (
+                    title,
+                    category,
+                    nonce,
+                    ciphertext,
+                    ticket_id
+                )
+            )
+        else:
+            cursor = connection.execute(
+                """
+                UPDATE tickets
+                SET title = ?,
+                    category = ?,
+                    description_nonce = ?,
+                    description = ?
+                WHERE id = ? AND user_id = ?
+                """,
+                (
+                    title,
+                    category,
+                    nonce,
+                    ciphertext,
+                    ticket_id,
+                    user_id
+                )
+            )
+
+        connection.commit()
+        return cursor.rowcount > 0
+
+    finally:
+        connection.close()
+        
+
+def delete_ticket(ticket_id, user_id, role):
+    connection = get_db_connection()
+
+    try:
+        if role == "admin":
+            cursor = connection.execute(
+                """
+                DELETE FROM tickets
+                WHERE id = ?
+                """,
+                (ticket_id,)
+            )
+        else:
+            cursor = connection.execute(
+                """
+                DELETE FROM tickets
+                WHERE id = ? AND user_id = ?
+                """,
+                (ticket_id, user_id)
+            )
+
+        connection.commit()
+        return cursor.rowcount > 0
+
+    finally:
+        connection.close()
+
