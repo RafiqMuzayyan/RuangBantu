@@ -1,9 +1,11 @@
 from flask import (
     Flask, render_template, request,
-    redirect, url_for, session, flash
+    redirect, url_for, session, flash, abort
 )
-from db.ticket import create_ticket as save_ticket
-from security.encryption import encrypt_data
+
+from security.encryption import encrypt_data, decrypt_data
+
+from db.ticket import get_user_tickets, get_ticket,create_ticket as save_ticket
 from db.connection import get_db_connection
 from db.user import register_user, authenticate_user
 
@@ -57,7 +59,28 @@ def dashboard():
     if "user_id" not in session:
         return redirect(url_for("login"))
 
-    return render_template("dashboard.html")
+    tickets = get_user_tickets(
+        session["user_id"],
+        session["role"]
+    )
+
+    total_tickets = len(tickets)
+    in_progress = sum(
+        1 for ticket in tickets
+        if ticket["status"] == "In Progress"
+    )
+    closed_tickets = sum(
+        1 for ticket in tickets
+        if ticket["status"] == "Closed"
+    )
+
+    return render_template(
+        "dashboard.html",
+        tickets=tickets,
+        total_tickets=total_tickets,
+        in_progress=in_progress,
+        closed_tickets=closed_tickets
+    )
 
 @app.route("/ticket/create", methods=["GET", "POST"])
 def create_ticket():
@@ -93,8 +116,24 @@ def ticket_detail(ticket_id):
     if "user_id" not in session:
         return redirect(url_for("login"))
 
-    return render_template("ticket_detail.html", ticket_id=ticket_id)
+    ticket = get_ticket(
+        ticket_id,
+        session["user_id"],
+        session["role"]
+    )
 
+    if ticket is None:
+        abort(404)
+
+    ticket["description"] = decrypt_data(
+        ticket["description_nonce"],
+        ticket["description"]
+    )
+
+    return render_template(
+        "ticket_detail.html",
+        ticket=ticket
+    )
 
 @app.route("/logout")
 def logout():

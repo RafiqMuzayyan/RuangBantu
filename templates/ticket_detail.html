@@ -23,7 +23,7 @@
         </nav>
 
         <div class="nav-account">
-            <span>Pengguna</span>
+            <span>{{ session['username'] }}</span>
             <a href="{{ url_for('logout') }}">Keluar</a>
         </div>
     </header>
@@ -43,37 +43,35 @@
 
             <div class="detail-header">
                 <div>
-                    <span class="detail-id">Tiket #001</span>
-                    <h2>Masalah koneksi internet</h2>
+                    <span class="detail-id">Tiket #{{ ticket.id }}</span>
+                    <h2>{{ ticket.title }}</h2>
                 </div>
 
-                <span class="status open">Open</span>
+                <span class="status {{ ticket.status|lower|replace(' ', '-') }}">
+                    {{ ticket.status }}
+                </span>
             </div>
 
             <div class="detail-information">
                 <div>
                     <span>Kategori</span>
-                    <strong>Technical</strong>
+                    <strong>{{ ticket.category }}</strong>
                 </div>
 
                 <div>
                     <span>Tanggal Dibuat</span>
-                    <strong>11 November 2026</strong>
+                    <strong>{{ ticket.created_at }}</strong>
                 </div>
 
                 <div>
                     <span>Pelapor</span>
-                    <strong>user01</strong>
+                    <strong>{{ ticket.username }}</strong>
                 </div>
             </div>
 
             <div class="detail-description">
                 <h3>Detail Keluhan</h3>
-                <p>
-                    Saya mengalami masalah koneksi internet sejak pagi.
-                    Koneksi sering terputus dan beberapa situs tidak
-                    dapat diakses.
-                </p>
+                <p>{{ ticket.description }}</p>
             </div>
 
             <div class="detail-footer">
