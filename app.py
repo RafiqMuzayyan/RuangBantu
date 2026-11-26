@@ -1,3 +1,6 @@
+import os
+from dotenv import load_dotenv
+
 from flask import (
     Flask, render_template, request,
     redirect, url_for, session, flash, abort
@@ -14,7 +17,9 @@ from db.ticket import (
 from db.user import register_user, authenticate_user
 
 app = Flask(__name__)
-app.secret_key = "ganti-dengan-secret-sementara"
+app.secret_key = os.getenv("FLASK_SECRET_KEY")
+if not app.secret_key:
+    raise RuntimeError("FLASK_SECRET_KEY belum diatur di .env")
 
 @app.route("/", methods=["GET", "POST"])
 def login():
