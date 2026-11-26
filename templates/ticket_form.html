@@ -24,7 +24,9 @@
 
         <div class="nav-account">
             <span>Pengguna</span>
-            <a href="{{ url_for('logout') }}">Keluar</a>
+            <form action="{{ url_for('logout') }}" method="POST">
+                <button type="submit">Keluar</button>
+            </form>
         </div>
     </header>
 

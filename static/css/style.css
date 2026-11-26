@@ -213,7 +213,7 @@ body {
 }
 
 .nav-menu a,
-.nav-account a {
+.nav-account a  {
     color: var(--muted);
     text-decoration: none;
     font-size: 14px;
@@ -232,9 +232,12 @@ body {
     font-size: 14px;
 }
 
-.nav-account a {
+.nav-account button {
     color: var(--primary);
     font-weight: 600;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
 .dashboard-container {
