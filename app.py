@@ -21,6 +21,14 @@ app.secret_key = os.getenv("FLASK_SECRET_KEY")
 if not app.secret_key:
     raise RuntimeError("FLASK_SECRET_KEY belum diatur di .env")
 
+IS_PRODUCTION = os.getenv("FLASK_ENVIRONMENT") == "production"
+
+app.config.update(
+    SESSION_COOKIE_HTTPONLY=True,
+    SESSION_COOKIE_SECURE=IS_PRODUCTION,
+    SESSION_COOKIE_SAMESITE="Lax",
+)
+
 @app.route("/", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
