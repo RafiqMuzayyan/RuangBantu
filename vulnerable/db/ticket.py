@@ -21,36 +21,25 @@ def create_ticket(user_id, title, category, nonce, ciphertext):
     finally:
         connection.close()
         
-def get_ticket(ticket_id, user_id, role):
+def get_ticket(ticket_id):
     connection = get_db_connection()
 
     try:
-        if role == "admin":
-            ticket = connection.execute(
-                """
-                SELECT tickets.*, users.username 
-                FROM tickets 
-                JOIN users ON tickets.user_id = users.id 
-                WHERE tickets.id = ?
-                """,
-                (ticket_id,)
-            ).fetchone()
-        else:
-            ticket = connection.execute(
-                """
-                SELECT tickets.*, users.username 
-                FROM tickets 
-                JOIN users ON tickets.user_id = users.id 
-                WHERE tickets.id = ? AND tickets.user_id = ?
-                """,
-                (ticket_id, user_id)
-            ).fetchone()
+        ticket = connection.execute(
+            """
+            SELECT tickets.*, users.username
+            FROM tickets
+            JOIN users ON tickets.user_id = users.id
+            WHERE tickets.id = ?
+            """,
+            (ticket_id,)
+        ).fetchone()
 
         return dict(ticket) if ticket else None
 
     finally:
         connection.close()
-        
+       
 def get_user_tickets(user_id, role):
     connection = get_db_connection()
 

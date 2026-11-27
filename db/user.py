@@ -33,7 +33,7 @@ def authenticate_user(email, password):
     try:
         user = connection.execute(
             "SELECT * FROM users WHERE email = ?",
-            (email)
+            (email,)
         ).fetchone()
 
         if user is None:

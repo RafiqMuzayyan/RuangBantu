@@ -140,8 +140,6 @@ def ticket_detail(ticket_id):
 
     ticket = get_ticket(
         ticket_id,
-        session["user_id"],
-        session["role"]
     )
 
     if ticket is None:
