@@ -35,6 +35,8 @@ app.config.update(
     SESSION_COOKIE_SAMESITE="Lax",
 )
 
+app.config["SESSION_COOKIE_NAME"] = "vulnerable_session"
+
 @app.route("/", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
