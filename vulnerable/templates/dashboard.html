@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | RuangBantu</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <header class="dashboard-navbar">
+        <div class="nav-brand">
+            <div class="brand-icon">R</div>
+            <span>RuangBantu</span>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="{{ url_for('dashboard') }}" class="active">Dashboard</a>
+            <a href="{{ url_for('my_tickets') }}">Tiket Saya</a>
+        </nav>
+
+        <div class="nav-account">
+            <span>{{ session['username'] }}</span>
+            <form action="{{ url_for('logout') }}" method="POST">
+                <button type="submit">Keluar</button>
+            </form>
+        </div>
+    </header>
+
+    <main class="dashboard-container">
+
+        <section class="dashboard-heading">
+            <div>
+                <h1>Selamat datang, {{ session['username'] }}!</h1>
+                <p>Pantau dan kelola laporan bantuanmu di sini.</p>
+            </div>
+
+            <a href="{{ url_for('create_ticket') }}" class="create-ticket-button">
+                + Buat Tiket
+            </a>
+        </section>
+
+        <section class="ticket-summary">
+            <div class="summary-card">
+                <span>Total Tiket</span>
+                <h2>{{ total_tickets }}</h2>
+            </div>
+
+            <div class="summary-card">
+                <span>Dalam Proses</span>
+                <h2>{{ in_progress }}</h2>
+            </div>
+
+            <div class="summary-card">
+                <span>Selesai</span>
+                <h2>{{ closed_tickets }}</h2>
+            </div>
+        </section>
+
+        <section class="ticket-section">
+            <div class="section-heading">
+                <div>
+                    <h2>Tiket Terbaru</h2>
+                    <p>Daftar laporan bantuan yang telah dibuat.</p>
+                </div>
+            </div>
+
+            <div class="ticket-table-wrapper">
+                <table class="ticket-table">
+                    <thead>
+                        <tr>
+                            <th>Judul Tiket</th>
+                            <th>Kategori</th>
+                            <th>Tanggal</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for ticket in tickets %}
+                            <tr>
+                                <td>
+                                    <a href="{{ url_for(
+                                        'ticket_detail',
+                                        ticket_id=ticket.id
+                                    ) }}">
+                                        {{ ticket.title }}
+                                    </a>
+                                </td>
+
+                                <td>{{ ticket.category }}</td>
+
+                                <td>{{ ticket.created_at }}</td>
+
+                                <td>
+                                    <span class="status {{ ticket.status|lower|replace(' ', '-') }}">
+                                        {{ ticket.status }}
+                                    </span>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="4">
+                                    Belum ada tiket yang dibuat.
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

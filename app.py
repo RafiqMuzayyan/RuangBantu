@@ -16,6 +16,8 @@ from db.ticket import (
     create_ticket as save_ticket)
 from db.user import register_user, authenticate_user
 
+load_dotenv()
+
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY")
 if not app.secret_key:
